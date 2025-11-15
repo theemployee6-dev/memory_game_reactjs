@@ -26,7 +26,6 @@ export const useGameLogic = (cardValues) => {
       isFlipped: false,
       isMatched: false,
     }));
-
     setCards(finalCards);
     setIsLocked(false);
     setMoves(0);
@@ -49,14 +48,17 @@ export const useGameLogic = (cardValues) => {
       return;
     }
 
+    // Atualiza o estado das cartas
     const newCards = cards.map((c) =>
       c.id === card.id ? { ...c, isFlipped: true } : c
     );
     setCards(newCards);
 
+    // Adiciona a carta ao array de cartas viradas
     const newFlippedCards = [...flippedCards, card.id];
     setFlippedCards(newFlippedCards);
 
+    // Verifica se há uma carta virada anteriormente
     if (flippedCards.length === 1) {
       setIsLocked(true);
       const firstCard = cards.find((c) => c.id === flippedCards[0]);
@@ -78,12 +80,12 @@ export const useGameLogic = (cardValues) => {
         }, 500);
       } else {
         setTimeout(() => {
-          const flippedBackCard = newCards.map((c) =>
+          const flippedBackCards = newCards.map((c) =>
             newFlippedCards.includes(c.id) || c.id === card.id
               ? { ...c, isFlipped: false }
               : c
           );
-          setCards(flippedBackCard);
+          setCards(flippedBackCards);
           setIsLocked(false);
           setFlippedCards([]);
         }, 1000);
