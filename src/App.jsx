@@ -1,3 +1,4 @@
+import React from "react";
 import { useGameLogic } from "./hooks/useGameLogic";
 
 import Card from "./components/Card";
@@ -23,7 +24,7 @@ const cardValues = [
   "🍒",
 ];
 
-function App() {
+const App = () => {
   const {
     cards,
     score,
@@ -39,13 +40,13 @@ function App() {
 
       {isGameComplete && <WinMessage moves={moves} />}
 
-      <div className="cards-grid">
+      <div className="cards-grid" role="list" aria-label="Memory cards">
         {cards.map((card) => (
           <Card key={card.id} card={card} onClick={handleCardClick} />
         ))}
       </div>
     </div>
   );
-}
+};
 
-export default App;
+export default React.memo(App);
