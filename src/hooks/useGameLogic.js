@@ -9,6 +9,7 @@ export const useGameLogic = (cardValues) => {
   const [moves, setMoves] = useState(0);
   const [isLocked, setIsLocked] = useState(false);
 
+  //embaralhar as cartas
   const shuffleArray = useCallback((array) => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
